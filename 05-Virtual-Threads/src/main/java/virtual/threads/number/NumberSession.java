@@ -9,8 +9,6 @@ import virtual.threads.server.Session;
 import virtual.threads.server.protocol.ErrorResponse;
 import virtual.threads.server.protocol.SessionInfo;
 
-import java.io.IOException;
-
 public record NumberSession(
     ServerId serverId,
     SessionInfo session
