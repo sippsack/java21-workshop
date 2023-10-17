@@ -11,11 +11,7 @@ public interface Session extends AutoCloseable {
     public abstract SessionInfo session();
 
     public default void logout() throws IOException {
-        try {
-            Service.logout(serverId(), session());
-        } catch(ClassNotFoundException ignore) {
-            ;
-        }
+        Service.logout(serverId(), session());
     }
 
     @Override

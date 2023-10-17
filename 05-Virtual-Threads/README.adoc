@@ -1,0 +1,16 @@
+
+== Virtual Threads
+
+== Structured Concurrency
+
+=== Aufgabe
+
+Schreiben Sie einen *StructuredTaskContext* auf Basis der *ExactlyThreeTaskScope*-Klasse, der auf exakt drei Ergebnisse wartet und diese – sobald verfügbar – zurückliefert.
+
+*Achtung*: Bitte denken Sie daran, dass die Benachrichtigung über *handleComplete* parallel erfolgen kann.
+
+== Scoped Values
+
+=== Aufgabe
+
+Erweitern Sie die Klasse *MakeIndirectPayment* derart, dass die Kreditkarte an die *makePayment* gereicht wird, ohne die *paySomething*-Methode zu verändern. Der dazugehörige *PaymentTest* ruft nur die *buySomething*-Methode, um einen Gegenstand zu einem vorgegebenen Preis zu kaufen und prüft anschließend den Kontostand der eingesetzten Kreditkarte.

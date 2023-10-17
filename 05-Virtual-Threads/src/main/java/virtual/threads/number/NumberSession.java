@@ -1,3 +1,4 @@
+
 package virtual.threads.number;
 
 import virtual.threads.number.intern.NumberRequest;
@@ -7,8 +8,6 @@ import virtual.threads.server.Service;
 import virtual.threads.server.Session;
 import virtual.threads.server.protocol.ErrorResponse;
 import virtual.threads.server.protocol.SessionInfo;
-import virtual.threads.weather.Weather;
-import virtual.threads.weather.WeatherException;
 
 import java.io.IOException;
 
@@ -17,10 +16,22 @@ public record NumberSession(
     SessionInfo session
 ) implements Session {
 
-    public Number requestCalculation(
+    public double calculateSquareRoot(double x) throws NumberException, IOException {
+        return requestCalculation(NumberFunction.SQUARE_ROOT, x);
+    }
+
+    public double retrieveIdentity(double x) throws NumberException, IOException {
+        return requestCalculation(NumberFunction.IDENTITY, x);
+    }
+
+    public double generateRandom(double x) throws NumberException, IOException {
+        return requestCalculation(NumberFunction.RANDOM, x);
+    }
+
+    public double requestCalculation(
         NumberFunction function,
         double value
-    ) throws IOException, NumberException {
+    ) throws NumberException {
         try {
             var response = Service.request(
                 serverId,
@@ -30,12 +41,12 @@ public record NumberSession(
             case ErrorResponse e:
                 throw new NumberException(e, this);
             case NumberResponse n:
-                return n.doubleValue();
+                return n.getResult();
             default:
                 throw new NumberException(response, this);
             }
-        } catch (ClassNotFoundException e) {
-            throw new Error(e);
+        } catch (Exception e) {
+            throw new NumberException(e.getMessage(), this);
         }
     }
 

@@ -110,10 +110,9 @@ public class Service {
      * @param password Das Kennwort für den angegebenen Benutzer
      * 
      * @return Die Session, über den der Zugang zu den Services gewährt wird.
-     * 
-     * @throws IOException
-     * @throws UnknownHostException
-     * @throws ClassNotFoundException
+     *
+     * @throws IOException wenn ein I/O-Fehler aufgetreten ist
+     * @throws UnknownHostException der Server-Host nicht bekannt ist
      */
     public static SessionInfo login(
         int id, 
@@ -121,23 +120,26 @@ public class Service {
         char[] password
     ) throws 
         IOException, 
-        UnknownHostException, 
-        ClassNotFoundException 
+        UnknownHostException
     {
-        var reply = Service.request(
-            id, 
-            new LoginRequest(name, password),
-            0,
-            () -> Arrays.fill(password, '0')
-        );
-        return switch (reply) {
-            case LoginResponse login -> login.session();
-            case ErrorResponse e -> {
-                System.out.println(e);
-                yield SessionInfo.NO_INFO; 
-            }
-            default -> null;
-        };
+        try {
+            var reply = Service.request(
+                    id,
+                    new LoginRequest(name, password),
+                    0,
+                    () -> Arrays.fill(password, '0')
+            );
+            return switch (reply) {
+                case LoginResponse login -> login.session();
+                case ErrorResponse e -> {
+                    System.out.println(e);
+                    yield SessionInfo.NO_INFO;
+                }
+                default -> null;
+            };
+        } catch (ClassNotFoundException e) {
+            throw new Error(e);
+        }
     }
     
     /**
@@ -158,30 +160,28 @@ public class Service {
      * @param id Der betroffene Server
      * @param session Die zu beendende Session
      * 
-     * @throws IOException
-     * @throws UnknownHostException
-     * @throws ClassNotFoundException
+     * @throws IOException wenn ein I/O-Fehler aufgetreten ist
+     * @throws UnknownHostException der Server-Host nicht bekannt ist
      */
     public static void logout(
         ServerId id, 
         SessionInfo session
     ) throws 
         IOException, 
-        UnknownHostException, 
-        ClassNotFoundException 
+        UnknownHostException
     {
-        var reply = Service.request(
-            id, 
-            new LogoutRequest(session),
-            0
-        );
-        switch (reply) {
-            case ErrorResponse e -> {
+        try {
+            var reply = Service.request(
+                    id,
+                    new LogoutRequest(session),
+                    0
+            );
+            if (reply instanceof ErrorResponse e) {
                 System.out.println(e);
             }
-            default -> {}
+        } catch (ClassNotFoundException e) {
+            throw new Error(e);
         }
     }
     
 }
-

@@ -4,6 +4,8 @@ public enum NumberFunction {
 
     SQUARE_ROOT,
 
-    RANDOM
+    RANDOM,
+
+    IDENTITY
 
 }

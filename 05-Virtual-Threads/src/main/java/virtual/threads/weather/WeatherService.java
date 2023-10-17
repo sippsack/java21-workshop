@@ -9,12 +9,62 @@ import java.net.UnknownHostException;
 
 public class WeatherService {
 
-    /**
-     * Ein Wetterdienst, der ohne Verzögerung antwortet.
-     */
-    public static final ServerId SERVICE_WITH_NO_DELAY   = new ServerId(1,  0);
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_1   = new ServerId(1,  0);
 
-    /**
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_2   = new ServerId(2,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_3   = new ServerId(3,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_4   = new ServerId(4,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_5   = new ServerId(5,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_6   = new ServerId(6,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_7   = new ServerId(7,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_8   = new ServerId(8,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_9   = new ServerId(9,  0);
+
+	/**
+	 * Ein Wetterdienst, der ohne Verzögerung antwortet.
+	 */
+	public static final ServerId SERVICE_WITH_NO_DELAY_10   = new ServerId(10,  0);
+
+	/**
+     * <b>Der</b> Wetterdienst, der ohne Verzögerung antwortet.
+     */
+    public static final ServerId SERVICE_WITH_NO_DELAY   = SERVICE_WITH_NO_DELAY_1;
+
+	/**
 	 * Ein Wetterdienst, der erst nach 10 ms antwortet.
 	 */
     public static final ServerId SERVICE_WITH_10_MS_DELAY   = new ServerId(1001,  10);
@@ -95,7 +145,6 @@ public class WeatherService {
      * 
      * @throws IOException
      * @throws UnknownHostException
-     * @throws ClassNotFoundException
      */
     public static WeatherSession login(
         ServerId id, 
@@ -103,8 +152,7 @@ public class WeatherService {
         char[] password
     ) throws         
         IOException, 
-        UnknownHostException, 
-        ClassNotFoundException 
+        UnknownHostException
     {
         return new WeatherSession(id, Service.login(id.id(), name, password));
     }
