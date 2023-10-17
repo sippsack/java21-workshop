@@ -1,2 +1,4 @@
-package string.template;public class SimpleStringTemplate {
+package string.template;
+
+public class Simple {
 }
