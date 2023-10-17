@@ -142,9 +142,9 @@ public class WeatherService {
      * @param password Das Kennwort für den angegebenen Benutzer
      * 
      * @return Die Session, über den der Zugang zu den Services gewährt wird.
-     * 
-     * @throws IOException
-     * @throws UnknownHostException
+     *
+	 * @throws IOException wenn ein I/O-Fehler aufgetreten ist
+	 * @throws UnknownHostException wenn der Server nicht bekannt ist
      */
     public static WeatherSession login(
         ServerId id, 

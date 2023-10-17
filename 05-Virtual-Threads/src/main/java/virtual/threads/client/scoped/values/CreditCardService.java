@@ -18,13 +18,16 @@ public class CreditCardService {
     }
 
     public Amount addBalance(CreditCard card, Amount delta) {
-        return accounts.compute(card.number(), (k, v) -> {
-            if (v == null) {
-                return delta;
-            } else {
-                return v.plus(delta);
+        return accounts.compute(
+            card.number(),
+            (k, v) -> {
+                if (v == null) {
+                    return delta;
+                } else {
+                    return v.plus(delta);
+                }
             }
-        });
+        );
     }
 
 }

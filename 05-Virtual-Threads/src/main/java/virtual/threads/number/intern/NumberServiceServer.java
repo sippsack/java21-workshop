@@ -49,7 +49,7 @@ public class NumberServiceServer extends ServiceServer {
             case IDENTITY:
                 result = value;
                 break;
-        };
+        }
 
         return new NumberResponse(id, value, op, result);
     }

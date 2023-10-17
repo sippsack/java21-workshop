@@ -7,9 +7,7 @@ public class MakeIndirectPayment {
 
     private static final ScopedValue<CreditCard> CREDIT_CARD = ScopedValue.newInstance();
 
-    public MakeIndirectPayment() {
-        ;
-    }
+    public MakeIndirectPayment() {}
 
     public void buySomething(String product, Amount amount, CreditCard credit_card) {
         System.out.println(product + " für " + amount);

@@ -16,15 +16,15 @@ public record NumberSession(
     SessionInfo session
 ) implements Session {
 
-    public double calculateSquareRoot(double x) throws NumberException, IOException {
+    public double calculateSquareRoot(double x) throws NumberException {
         return requestCalculation(NumberFunction.SQUARE_ROOT, x);
     }
 
-    public double retrieveIdentity(double x) throws NumberException, IOException {
+    public double retrieveIdentity(double x) throws NumberException {
         return requestCalculation(NumberFunction.IDENTITY, x);
     }
 
-    public double generateRandom(double x) throws NumberException, IOException {
+    public double generateRandom(double x) throws NumberException {
         return requestCalculation(NumberFunction.RANDOM, x);
     }
 
