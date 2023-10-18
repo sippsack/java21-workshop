@@ -25,12 +25,15 @@ public class PaymentTest {
     );
 
     @Test
-    public void testPayment() {
+    public void testPayment() throws InterruptedException {
 
         var PRICE = new Amount(12.25);
 
         var payment = new MakeIndirectPayment();
-        payment.buySomething("Flintstein", PRICE, FREDS_CARD);
+        var t1 = Thread.ofVirtual().start(() -> payment.buySomething("Flintstein", PRICE, FREDS_CARD));
+        var t2 = Thread.ofVirtual().start(() -> payment.buySomething("Flintstein", PRICE, WILMAS_CARD));
+        t1.join();
+        t2.join();
 
         var amount = CREDIT_SERVICE.getBalance(FREDS_CARD);
         Assertions.assertEquals(PRICE, amount);

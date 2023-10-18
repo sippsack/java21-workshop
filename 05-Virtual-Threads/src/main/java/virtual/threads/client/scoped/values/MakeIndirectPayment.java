@@ -5,11 +5,16 @@ import static virtual.threads.client.scoped.values.CreditCardService.CREDIT_SERV
 
 public class MakeIndirectPayment {
 
+    private static final ScopedValue<CreditCard> CC = ScopedValue.newInstance();
+
     public MakeIndirectPayment() {}
 
     public void buySomething(String product, Amount amount, CreditCard credit_card) {
-        System.out.println(product + " für " + amount);
-        paySomething(amount);
+        System.out.println(product + " für " + amount + " von " + credit_card);
+
+        ScopedValue.where(CC, credit_card).run(
+            () -> paySomething(amount)
+        );
     }
 
     /**
@@ -23,9 +28,9 @@ public class MakeIndirectPayment {
 
     private void makePayment(Amount amount) {
         // An dieser Stelle wird die Thread-lokale Kreditkarte benötigt.
-        CreditCard card = null;
+        CreditCard card = CC.get();
 
-        CREDIT_SERVICE.addBalance(card, amount);
+        System.out.println(amount + " von " + card + ": " + CREDIT_SERVICE.addBalance(card, amount));
     }
 
 }

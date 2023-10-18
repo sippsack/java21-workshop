@@ -37,7 +37,8 @@ public class StructuredTest {
             var deadline = Instant.now().plus(Duration.ofSeconds(3));
 
             scope.joinUntil(deadline);
-            System.out.println(scope.result());
+            Weather w = scope.result();
+            System.out.println(w.getTemperature());
         }
     }
 

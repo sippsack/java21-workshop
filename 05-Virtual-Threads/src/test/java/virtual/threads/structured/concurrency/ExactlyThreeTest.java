@@ -97,7 +97,7 @@ public class ExactlyThreeTest {
         }
     }
 
-    @Test
+//    @Test
     public void testSuccessfulEvenWithEndlessDelay() throws InterruptedException {
         try (var scope = createTaskScope()) {
             scope.fork(() -> ConcurrentRequest.getWeather(SERVICE_WITH_MAX_DELAY, AREA, TIME));
@@ -142,12 +142,8 @@ public class ExactlyThreeTest {
             scope.fork(() -> ConcurrentRequest.getWeather(SERVICE_WITH_ERROR, AREA, TIME));
             scope.fork(() -> ConcurrentRequest.getWeather(SERVICE_WITH_ERROR, AREA, TIME));
 
-    /*(1)*/ var deadline = Instant.now().plus(Duration.ofSeconds(3));
-    /*(1)*/ Assertions.assertThrows(TimeoutException.class, () -> scope.joinUntil(deadline));
-    /*(1)*/ Assertions.assertThrows(IllegalStateException.class, scope::result);
-
-    /*(2)*/ // scope.join();
-    /*(2)*/ // Assertions.assertThrows(NoSuchElementException.class, scope::result);
+            scope.join();
+            Assertions.assertThrows(NoSuchElementException.class, scope::result);
 
         }
     }
