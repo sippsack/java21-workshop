@@ -30,13 +30,14 @@ public class StringTemplates {
 
         // TODO: FMT
 
+        // TODO: Text Blocks
+
         // RAW
         internals();
-
     }
 
     private static void internals() {
-        System.out.println("Internals:\n\n");
+        System.out.println("\n\nInternals:\n");
         System.out.println(STR."Today is day \{ LocalDate.now().getDayOfYear()} of year \{LocalDate.now().getYear()}.");
         StringTemplate template = StringTemplate.of("");
         System.out.println(template.fragments());
