@@ -1,0 +1,6 @@
+== String Templates
+
+=== Live-Demo
+
+* Klasse `string.template.StringTemplates`
+* Test `string.template.SimpleTests`

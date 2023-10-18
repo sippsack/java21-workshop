@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam class {
+BackgroundColor<<New>> Lightgreen
+'BorderColor<<New>> Tomato
+}
+
+skinparam linetype polyline
+'skinparam linetype ortho
+
+
+interface LinkedList<T> <<sealed>>
+
+class Empty<T>
+class Element<T> {
+    T value
+    LinkedList<T> next
+}
+
+LinkedList <|.. Empty
+LinkedList <|.. Element
+
+@enduml
+

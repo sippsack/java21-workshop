@@ -1,0 +1,7 @@
+== Unnamed Classes + Instance Main Methods
+
+=== Live-Demo
+
+* Umbau der Klasse `MainClassic` zu einer Unnamed Class mit Instance Main Method
+
+* weitere Beispiele in den Klassen `Main1` und `Main2`
