@@ -1,4 +1,4 @@
 package pattern.matching.badtelefon.v3.tarif;
 
-public interface Tarif {
+public sealed interface Tarif permits PrivatTarif, BusinessTarif, ProfiTarif {
 }

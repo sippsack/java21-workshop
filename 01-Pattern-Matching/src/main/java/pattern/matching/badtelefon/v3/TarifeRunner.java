@@ -12,7 +12,7 @@ public class TarifeRunner {
     public static void main(String args[]) {
         Random random = new Random();
 
-        for (Tarif tarif : Arrays.asList(new PrivatTarif(), new BusinessTarif(), new ProfiTarif())) {
+        for (Tarif tarif : Arrays.asList(new PrivatTarif(0.1), new BusinessTarif(), new ProfiTarif())) {
             System.out.println(String.format("\nVerarbeitung von Tarif %s", tarif.getClass().getSimpleName()));
             Kunde k = new Kunde(tarif);
 

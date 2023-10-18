@@ -15,22 +15,21 @@ public class Kunde {
     }
 
     public void account(int minuten, Zeitpunkt zeitpunkt) {
-        if (tarif instanceof PrivatTarif) {
-            var privatTarif = (PrivatTarif) tarif;
-            var factor = (100 - privatTarif.getRabatt()) / 100;
-            var minutenPreis = zeitpunkt.isMondschein() ? PrivatTarif.MONDSCHEINPREISPROMINUTE : PrivatTarif.PREISPROMINUTE;
-            var nettoMinuten = privatTarif.getNettoMinuten(minuten);
-            gebuehr += factor * nettoMinuten * minutenPreis;
-        } else if (tarif instanceof BusinessTarif) {
-            var businessTarif = (BusinessTarif) tarif;
-            var factor = businessTarif.isVipKunde() ? 0.8 : 1.0;
-            double minutenPreis = zeitpunkt.isMondschein() ? BusinessTarif.MONDSCHEINPREISPROMINUTE : BusinessTarif.PREISPROMINUTE;
-            gebuehr += factor * minuten * minutenPreis;
-        } else if (tarif instanceof ProfiTarif) {
-            gebuehr += minuten * ProfiTarif.PREISPROMINUTE;
-        } else {
-            gebuehr += 60;
-        }
+        gebuehr += switch (tarif) {
+            case PrivatTarif privatTarif -> {
+                var factor = (100 - privatTarif.rabatt()) / 100;
+                var minutenPreis = zeitpunkt.isMondschein() ? PrivatTarif.MONDSCHEINPREISPROMINUTE : PrivatTarif.PREISPROMINUTE;
+                var nettoMinuten = privatTarif.getNettoMinuten(minuten);
+                yield factor * nettoMinuten * minutenPreis;
+            }
+            case BusinessTarif businessTarif -> {
+                var factor = businessTarif.isVipKunde() ? 0.8 : 1.0;
+                double minutenPreis = zeitpunkt.isMondschein() ? BusinessTarif.MONDSCHEINPREISPROMINUTE : BusinessTarif.PREISPROMINUTE;
+                yield factor * minuten * minutenPreis;
+            }
+            case ProfiTarif _ -> minuten * ProfiTarif.PREISPROMINUTE;
+            case null, default -> 60;
+        };
     }
 
     public double getGebuehr() {
